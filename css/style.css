@@ -1,0 +1,316 @@
+/* style.css - Multi-purpose modern restaurant review theme */
+
+:root {
+  --primary-color: #ff7f50; 
+  --secondary-color: #ffd166; 
+  --accent-color: #43aa8b; 
+  --background-color: #fff8f0;
+  --header-footer-bg: var(--primary-color);
+  --header-footer-text: #fff; /* High contrast text */
+  --card-bg: #fff;
+  --text-color: #2d2d2d;
+  --muted-color: #888;
+  --border-radius: 16px;
+  --shadow: 0 4px 16px rgba(255,127,80,0.08);
+  --transition: 0.2s ease;
+  --max-width: 1100px;
+}
+
+
+body {
+  font-family: "Chela One", system-ui;
+  background: var(--background-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 0;
+}
+
+
+header {
+  background: var(--header-footer-bg);
+  color: var(--header-footer-text);
+  padding: 32px 0 16px 0;
+  box-shadow: var(--shadow);
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
+header h1 {
+  margin: 0 0 8px 0;
+  font-size: 2.5rem;
+  text-align: center;
+  letter-spacing: 1px;
+  font-weight: 700;
+  text-shadow: 0 2px 8px rgba(67,170,139,0.12);
+}
+
+nav ul {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul:hover {
+  gap: 28px;
+  transition: gap var(--transition);
+  border: 0px none;
+}
+
+nav a {
+  color: var(--header-footer-text);
+  text-decoration: none;
+  font-weight: 600;
+  padding: 8px 18px;
+  border-radius: 8px;
+  transition: background var(--transition), color var(--transition), box-shadow var(--transition);
+  font-size: 1.08rem;
+}
+nav a:hover {
+  /* background: var(--secondary-color); */
+  /* color: var(--primary-color); */
+  box-shadow: 0 6px 20px rgba(255,236,202,0.5 6);
+  background: var(--primary-color); 
+}
+
+
+main {
+  max-width: var(--max-width);
+  margin: 40px auto;
+  padding: 0 16px;
+}
+section {
+  margin-bottom: 36px;
+}
+h2 {
+  font-size: 1.7rem;
+  margin-bottom: 18px;
+  color: var(--primary-color);
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 4px rgba(255,127,80,0.08);
+}
+
+
+form {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+input[type="text"] {
+  padding: 10px 14px;
+  border: 1.5px solid var(--accent-color);
+  border-radius: 8px;
+  font-size: 1.08rem;
+  flex: 1 1 180px;
+  background: #fff;
+  transition: border var(--transition), box-shadow var(--transition);
+  box-shadow: 0 2px 8px rgba(67,170,139,0.07);
+}
+input[type="text"]:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 2px 12px rgba(255,127,80,0.12);
+}
+button {
+  background: linear-gradient(90deg, var(--primary-color) 70%, var(--accent-color) 100%);
+  color: var(--header-footer-text);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 26px;
+  font-size: 1.08rem;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(255,127,80,0.10);
+  transition: background var(--transition), color var(--transition), box-shadow var(--transition);
+}
+button:hover {
+  background: var(--secondary-color);
+  color: var(--accent-color);
+  box-shadow: 0 4px 16px rgba(255,209,102,0.18);
+  transition: background var(--transition), color var(--transition);
+}
+
+#nav-menu {
+  background: none;
+}
+
+.Socials {
+  justify-content: left;
+  text-align: left;
+}
+
+nav ul:hover {
+  gap: 28px;
+  background-color: none;
+  background: var(--primary-color);
+  box-shadow: 0 6px 20px rgba(255,209,102,0.16);
+  transition: gap var(--transition);
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+ul li {
+  background: var(--secondary-color);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  padding: 12px 20px;
+  font-size: 1.05rem;
+  transition: box-shadow var(--transition), background var(--transition);
+}
+ul li:hover {
+  box-shadow: 0 6px 20px rgba(255,209,102,0.16);
+  background: var(--primary-color);
+}
+ul li a {
+  color: var(--header-footer-text);
+  letter-spacing: 0.1rem;
+  text-decoration: none;
+  font-weight: 600;
+}
+ul li a:hover {
+  text-decoration: underline;
+  transition: color var(--transition), background var(--transition);
+}
+
+
+article {
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  padding: 22px 26px;
+  margin-bottom: 18px;
+  transition: box-shadow var(--transition), border var(--transition);
+  border: 1.5px solid var(--secondary-color);
+}
+article:hover {
+  box-shadow: 0 8px 24px rgba(255,127,80,0.16);
+  border-color: var(--primary-color);
+}
+article h3 {
+  margin-top: 0;
+  color: var(--primary-color);
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+article p {
+  margin: 8px 0;
+}
+article time {
+  color: var(--accent-color);
+  font-size: 0.98em;
+}
+
+footer {
+  background: var(--accent-color);
+  color: var(--header-footer-text);
+  padding: 40px 0 18px 0;
+  margin-top: 48px;
+  border-top-left-radius: 32px;
+  border-top-right-radius: 32px;
+  letter-spacing: 0.1rem;
+}
+footer section {
+  max-width: var(--max-width);
+  margin: 0 auto 18px auto;
+  padding: 0 16px;
+}
+footer h2 {
+  font-size: 1.15rem;
+  margin-bottom: 10px;
+  color: var(--header-footer-text);
+  font-weight: 700;
+}
+footer ul {
+  gap: 10px;
+}
+footer ul li {
+  background: none;
+  box-shadow: none;
+  padding: 0;
+}
+footer a {
+  color: var(--secondary-color);
+  text-decoration: none;
+  font-weight: 600;
+}
+footer a:hover {
+  text-decoration: underline;
+  color: #fff;
+}
+footer p {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 1em;
+  color: var(--header-footer-text);
+  letter-spacing: 0.5px;
+}
+
+
+/* Utility classes */
+.flex {
+  display: flex;
+  gap: 16px;
+}
+.grid {
+  display: grid;
+  gap: 18px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+.card {
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  padding: 22px 26px;
+}
+.text-center {
+  text-align: center;
+}
+.muted {
+  color: var(--muted-color);
+}
+
+
+/* Responsive */
+@media (max-width: 800px) {
+  main {
+    padding: 0 6px;
+  }
+  nav ul {
+    gap: 12px;
+  }
+  article, .card {
+    padding: 14px 10px;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  header, footer {
+    border-radius: 0;
+    background: var(--header-footer-bg);
+    color: var(--header-footer-text);
+  }
+}
+@media (max-width: 500px) {
+  header h1 {
+    font-size: 1.3rem;
+  }
+  h2 {
+    font-size: 1.1rem;
+  }
+  nav ul {
+    flex-direction: column;
+    gap: 6px;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

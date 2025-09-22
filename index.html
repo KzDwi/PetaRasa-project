@@ -5,37 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PeRaSa - Peta Rasa Samarinda</title>
     <meta name="description" content="Temukan restoran terbaik, ulasan, dan promo kuliner di Samarinda">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Chela+One&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
+    <header class="text-center">
         <h1>PeRaSa - Peta Rasa Samarinda</h1>
         <nav>
             <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#restoran">Restoran</a></li>
-                <li><a href="#kategori">Kategori</a></li>
-                <li><a href="#ulasan">Ulasan</a></li>
-                <li><a href="#tentang">Tentang Kami</a></li>
-                <li><a href="#randomize">Terserah Aja Deh</a></li>
-                <li><a href="#login">Masuk</a></li>
-                <li><a href="#Register">Daftar</a></li>
+                <li id="nav-menu"><a href="#home">Home</a></li>
+                <li id="nav-menu"><a href="#restoran">Restoran</a></li>
+                <li id="nav-menu"><a href="#kategori">Kategori</a></li>
+                <li id="nav-menu"><a href="#ulasan">Ulasan</a></li>
+                <li id="nav-menu"><a href="#tentang">Tentang Kami</a></li>
+                <li id="nav-menu"><a href="#randomize">Terserah Aja Deh</a></li>
+                <li id="nav-menu"><a href="#login">Masuk</a></li>
+                <li id="nav-menu"><a href="#Register">Daftar</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
-        <section id="pencarian">
+        <section id="pencarian" class="card">
             <h2>Temukan Restoran Favoritmu</h2>
-            <form>
+            <form class="flex">
                 <input type="text" placeholder="Cari restoran atau masakan..." aria-label="Cari restoran atau masakan">
                 <input type="text" placeholder="Lokasi (kota atau area)" aria-label="Lokasi">
                 <button type="submit">Cari</button>
             </form>
         </section>
 
-        <section id="kategori-populer">
+        <section id="kategori-populer" class="card">
             <h2>Kategori Populer</h2>
-            <ul>
+            <ul class="flex">
                 <li><a href="#makanan-indonesia">Makanan Indonesia</a></li>
                 <li><a href="#camilan">Camilan</a></li>
                 <li><a href="#makanan-jepang">Makanan Jepang</a></li>
@@ -45,107 +49,109 @@
             </ul>
         </section>
 
-        <section id="rekomendasi-restoran">
+        <section id="rekomendasi-restoran" class="card">
             <h2>Rekomendasi Restoran</h2>
-            <article>
-                <h3>Kikitaru (Ex. Taberu)</h3>
-                <p>SCP Mall Lt. 2, Samarinda.</p>
-                <p>Masakan Jepang • $$$</p>
-                <p>Rating: 4.5/5 (210 ulasan)</p>
-                <a href="#kikitaru">Lihat Detail</a>
-            </article>
-            
-            <article>
-                <h3>Nasi Kuning Mbah</h3>
-                <p>Jl. KS Tubun Gg.7, Samarinda.</p>
-                <p>Makanan Indonesia • $</p>
-                <p>Rating: 4.7/5 (90 ulasan)</p>
-                <a href="#naskun-tubun">Lihat Detail</a>
-            </article>
-            
-            <article>
-                <h3>Mie Ayam Kacang</h3>
-                <p>Jl. Kecapi, Dadi Mulya, Samarinda.</p>
-                <p>Street Food • $</p>
-                <p>Rating: 4.6/5 (31 ulasan)</p>
-                <a href="#warung-padang">Lihat Detail</a>
-            </article>
+            <div class="grid">
+                <article class="card">
+                    <h3>Kikitaru (Ex. Taberu)</h3>
+                    <p>SCP Mall Lt. 2, Samarinda.</p>
+                    <p>Masakan Jepang • $$$</p>
+                    <p>Rating: 4.5/5 (210 ulasan)</p>
+                    <a href="#kikitaru">Lihat Detail</a>
+                </article>
+                <article class="card">
+                    <h3>Nasi Kuning Mbah</h3>
+                    <p>Jl. KS Tubun Gg.7, Samarinda.</p>
+                    <p>Makanan Indonesia • $</p>
+                    <p>Rating: 4.7/5 (90 ulasan)</p>
+                    <a href="#naskun-tubun">Lihat Detail</a>
+                </article>
+                <article class="card">
+                    <h3>Mie Ayam Kacang</h3>
+                    <p>Jl. Kecapi, Dadi Mulya, Samarinda.</p>
+                    <p>Street Food • $</p>
+                    <p>Rating: 4.6/5 (31 ulasan)</p>
+                    <a href="#warung-padang">Lihat Detail</a>
+                </article>
+            </div>
         </section>
 
-        <section id="ulasan-terbaru">
+        <section id="ulasan-terbaru" class="card">
             <h2>Ulasan Terbaru</h2>
-            <article>
-                <h3>Mie Ayam Kacang</h3>
-                <p>Oleh: Budi Santoso</p>
-                <p>Rating: 4/5</p>
-                <p>Porsinya sangat besar, ayamnya juga banyak, harganya juga sangat murah. Cuma sedikit belum terbiasa buat makan mie ayam tanpa keripiknya yang diganti kacang.</p>
-                <time datetime="2025-08-25">25 Agustus 2025</time>
-            </article>
-            
-            <article>
-                <h3>Kikitaru (Ex. Taberu)</h3>
-                <p>Oleh: Sari Wijaya</p>
-                <p>Rating: 5/5</p>
-                <p>Tempatnya sangat mirip seperti di jepang, ramen nya juga ga kalah enak sama resto sebelah.</p>
-                <time datetime="2025-08-24">24 Agustus 2025</time>
-            </article>
+            <div class="grid">
+                <article class="card">
+                    <h3>Mie Ayam Kacang</h3>
+                    <p>Oleh: Budi Santoso</p>
+                    <p>Rating: 4/5</p>
+                    <p>Porsinya sangat besar, ayamnya juga banyak, harganya juga sangat murah. Cuma sedikit belum terbiasa buat makan mie ayam tanpa keripiknya yang diganti kacang.</p>
+                    <time datetime="2025-08-25">25 Agustus 2025</time>
+                </article>
+                <article class="card">
+                    <h3>Kikitaru (Ex. Taberu)</h3>
+                    <p>Oleh: Sari Wijaya</p>
+                    <p>Rating: 5/5</p>
+                    <p>Tempatnya sangat mirip seperti di jepang, ramen nya juga ga kalah enak sama resto sebelah.</p>
+                    <time datetime="2025-08-24">24 Agustus 2025</time>
+                </article>
+            </div>
         </section>
 
-        <section id="artikel-terbaru">
+        <section id="artikel-terbaru" class="card">
             <h2>Artikel Terbaru</h2>
-            <article>
-                <h3>10 Tempat Makan yang Menjadi Penyelamat Anak kos di Samarinda</h3>
-                <p>Selain harga yang murah, rasa yang enak dan porsi yang banyak adalah tiga hal yang...</p>
-                <a href="#baca-artikel">Baca Selengkapnya</a>
-            </article>
-            
-            <article>
-                <h3>Menu Baru yang Wajib Dicoba Oktober Nanti</h3>
-                <p>Deretan menu dari tempat makan yang mungkin belum kamu tahu di Samarinda, apalagi....</p>
-                <a href="#baca-artikel">Baca Selengkapnya</a>
-            </article>
+            <div class="grid">
+                <article class="card">
+                    <h3>10 Tempat Makan yang Menjadi Penyelamat Anak kos di Samarinda</h3>
+                    <p>Selain harga yang murah, rasa yang enak dan porsi yang banyak adalah tiga hal yang...</p>
+                    <a href="#baca-artikel">Baca Selengkapnya</a>
+                </article>
+                <article class="card">
+                    <h3>Menu Baru yang Wajib Dicoba Oktober Nanti</h3>
+                    <p>Deretan menu dari tempat makan yang mungkin belum kamu tahu di Samarinda, apalagi....</p>
+                    <a href="#baca-artikel">Baca Selengkapnya</a>
+                </article>
+            </div>
         </section>
     </aside>
 
     <footer>
-        <section>
-            <h2>Tentang PeRaSa</h2>
-            <ul>
-                <li><a href="#tentang-kami">Tentang Kami</a></li>
-                <li><a href="#karir">Karir</a></li>
-                <li><a href="#blog">Blog</a></li>
-                <li><a href="#partner">Partner Kami</a></li>
-            </ul>
-        </section>
-        
-        <section>
-            <h2>Bantuan</h2>
-            <ul>
-                <li><a href="#faq">FAQ</a></li>
-                <li><a href="#syarat-ketentuan">Syarat & Ketentuan</a></li>
-                <li><a href="#kebijakan-privasi">Kebijakan Privasi</a></li>
-                <li><a href="#kontak">Kontak Kami</a></li>
-            </ul>
-        </section>
-        
-        <section>
-            <h2>Ikuti Kami</h2>
-            <ul>
-                <li><a href="#facebook">Facebook</a></li>
-                <li><a href="#instagram">Instagram</a></li>
-                <li><a href="#twitter">Twitter</a></li>
-            </ul>
-        </section>
-        
-        <section>
-            <h2>Referensi & Inspirasi Desain</h2>
-            <ul>
-                <li><a href="https://www.pergikuliner.com" target="_blank">PergiKuliner.com</a> - Situs asli yang menjadi inspirasi</li>
-                <li><a href="https://www.tripadvisor.com/Restaurants" target="_blank">TripAdvisor Restaurants</a> - Situs ulasan Internasional</li>
-            </ul>
-        </section>
-        
-        <p>&copy; 2025 PeRaSa - Peta Rasa Samarinda</a></p>
+        <div class="flex" style="flex-wrap: wrap; justify-content: center; gap: 32px;">
+            <section>
+                <h2>Tentang PeRaSa</h2>
+                <ul>
+                    <li id="nav-menu"><a href="#tentang-kami">Tentang Kami</a></li>
+                    <li id="nav-menu"><a href="#karir">Karir</a></li>
+                    <li id="nav-menu"><a href="#blog">Blog</a></li>
+                    <li id="nav-menu"><a href="#partner">Partner Kami</a></li>
+                </ul>
+            </section>
+            <section>
+                <h2>Bantuan</h2>
+                <ul>
+                    <li id="nav-menu"><a href="#faq">FAQ</a></li>
+                    <li id="nav-menu"><a href="#syarat-ketentuan">Syarat & Ketentuan</a></li>
+                    <li id="nav-menu"><a href="#kebijakan-privasi">Kebijakan Privasi</a></li>
+                    <li id="nav-menu"><a href="#kontak">Kontak Kami</a></li>
+                </ul>
+            </section>
+            <section class="Socials">
+                <h2>Ikuti Kami</h2>
+                <ul>
+                    <li id="nav-menu"><a href="#facebook">Facebook</a></li>
+                    <li id="nav-menu"><a href="#instagram">Instagram</a></li>
+                    <li id="nav-menu"><a href="#twitter">Twitter</a></li>
+                </ul>
+            </section>
+            <br>
+            <section>
+                <h2>Referensi & Inspirasi Desain</h2>
+                <ul>
+                    <li id="nav-menu"><a href="https://www.pergikuliner.com" target="_blank">PergiKuliner.com</a> - Situs asli yang menjadi inspirasi</li>
+                    <br>
+                    <li id="nav-menu"><a href="" target="_blank">TripAdvisor Restaurants</a> - Situs ulasan Internasional</li>
+                </ul>
+            </section>
+        </div>
+        <p class="text-center">&copy; 2025 PeRaSa - Peta Rasa Samarinda</p>
     </footer>
 </body>
 </html>
