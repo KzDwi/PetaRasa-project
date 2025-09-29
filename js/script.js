@@ -107,6 +107,7 @@ function addThemeToggle() {
     // themeToggle.addEventListener('click', toggleDarkMode);
     const themeToggle = document.createElement('button');
     themeToggle.id = 'theme-toggle';
+    themeToggle.innerHTML = '🌙 Dark Mode';
     themeToggle.style.cssText = `
         position: fixed;
         bottom: 30px;
@@ -389,11 +390,17 @@ function toggleDarkMode() {
 function enableDarkMode() {
     document.body.classList.add('dark-mode');
     localStorage.setItem('darkMode', 'true');
+    if (elements.themeToggle) {
+        elements.themeToggle.innerHTML = '☀️ Light Mode';
+    }
 }
 
 function disableDarkMode() {
     document.body.classList.remove('dark-mode');
     localStorage.setItem('darkMode', 'false');
+    if (elements.themeToggle) {
+        elements.themeToggle.innerHTML = '🌙 Dark Mode';
+    }
 }
 
 // Utility functions
