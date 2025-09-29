@@ -239,6 +239,15 @@ h2 {
   text-shadow: 0 1px 4px rgba(255,127,80,0.08);
 }
 
+.logo-small {
+  background: rgba(0,0,0,0.10);
+}
+.logo-small:hover {
+  background: rgba(0,0,0,0.20);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  transform: scale(1.05);
+  transition: background var(--transition), box-shadow var(--transition), transform var(--transition);
+}
 
 form {
   display: flex;
