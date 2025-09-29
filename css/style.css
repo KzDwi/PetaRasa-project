@@ -1,3 +1,17 @@
+/* Logo next to title */
+.header-title-logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+.logo-small {
+  height: 44px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
 /* style.css - Multi-purpose modern restaurant review theme */
 
 :root {
@@ -44,6 +58,7 @@ header h1 {
 }
 
 nav ul {
+  border-radius: 0px;
   display: flex;
   justify-content: center;
   gap: 24px;
@@ -58,6 +73,10 @@ nav ul:hover {
   border: 0px none;
 }
 
+nav ul li{
+  background: rgba(255, 209, 102, 0.60);
+}
+
 nav a {
   color: var(--header-footer-text);
   text-decoration: none;
@@ -68,12 +87,140 @@ nav a {
   font-size: 1.08rem;
 }
 nav a:hover {
-  /* background: var(--secondary-color); */
-  /* color: var(--primary-color); */
+  background: var(--secondary-color);
+  color: var(--primary-color);
   box-shadow: 0 6px 20px rgba(255,236,202,0.5 6);
-  background: var(--primary-color); 
+}
+.dark-mode nav a:hover {
+  background: var(--secondary-color);
+    color: #2d2d2d !important;
+  box-shadow: 0 6px 20px rgba(255, 209, 102, 0.2);
+}
+.dark-mode .modal-content {
+  color: var(--secondary-color);
 }
 
+/* Theme Toggle Button - Icon Only dengan Hover Effect */
+#theme-toggle {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 1000;
+    background: var(--secondary-color);
+    color: var(--text-color);
+    border: none;
+    padding: 14px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    transition: all var(--transition);
+    font-size: 1.3rem;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+/* Default state - hanya icon */
+#theme-toggle::before {
+    content: '🌙'; /* Icon moon default */
+}
+
+#theme-toggle span {
+    display: none; /* Sembunyikan teks */
+}
+
+/* Hover state - tampilkan teks */
+#theme-toggle:hover {
+    width: auto;
+    padding: 14px 20px;
+    border-radius: 50px;
+}
+
+#theme-toggle:hover::before {
+    content: "🌙 "; /* Icon + spasi */
+}
+
+#theme-toggle:hover::after {
+    content: "Dark Mode"; /* Teks muncul saat hover */
+    font-size: 1rem;
+    margin-left: 4px;
+}
+
+/* Dark mode styles */
+.dark-mode #theme-toggle::before {
+    content: "☀️ "; /* Icon sun untuk dark mode */
+}
+
+.dark-mode #theme-toggle:hover::after {
+    content: "Light Mode"; /* Teks berubah saat hover di dark mode */
+}
+
+/* Hover effects */
+#theme-toggle:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(255, 127, 80, 0.3);
+}
+
+.dark-mode #theme-toggle {
+    background: var(--accent-color);
+    color: white;
+}
+
+.dark-mode #theme-toggle:hover {
+    background: var(--secondary-color);
+    color: var(--text-color);
+    box-shadow: 0 6px 25px rgba(255, 209, 102, 0.4);
+}
+
+/* Smooth transition untuk width */
+#theme-toggle {
+    transition: 
+        all var(--transition),
+        width 0.3s ease,
+        border-radius 0.3s ease;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    #theme-toggle {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+    
+    #theme-toggle:hover {
+        width: auto;
+        padding: 12px 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    #theme-toggle {
+        bottom: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+    }
+    
+    #theme-toggle:hover {
+        width: auto;
+        padding: 10px 16px;
+    }
+    
+    #theme-toggle:hover::after {
+        font-size: 0.9rem;
+    }
+}
 
 main {
   max-width: var(--max-width);
@@ -136,6 +283,10 @@ button:hover {
 #nav-menu {
   background: none;
 }
+#nav-menu:hover {
+  background: none;
+  box-shadow: none;
+}
 
 .Socials {
   justify-content: left;
@@ -145,8 +296,6 @@ button:hover {
 nav ul:hover {
   gap: 28px;
   background-color: none;
-  background: var(--primary-color);
-  box-shadow: 0 6px 20px rgba(255,209,102,0.16);
   transition: gap var(--transition);
 }
 
@@ -169,6 +318,11 @@ ul li {
 ul li:hover {
   box-shadow: 0 6px 20px rgba(255,209,102,0.16);
   background: var(--primary-color);
+}
+ul li:active {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
 }
 ul li a {
   color: var(--header-footer-text);
@@ -313,4 +467,136 @@ footer p {
   .grid {
     grid-template-columns: 1fr;
   }
+}
+
+/* Tambahkan di akhir file style.css */
+
+/* Dark Mode Styles */
+.dark-mode {
+    --background-color: #1a1a1a;
+    --card-bg: #2d2d2d;
+    --text-color: #ffffff;
+    --muted-color: #aaaaaa;
+    --header-footer-bg: #2d2d2d;
+}
+
+.dark-mode header,
+.dark-mode footer {
+    background: var(--header-footer-bg);
+}
+
+.dark-mode .card {
+    border-color: #444;
+}
+
+.dark-mode input[type="text"] {
+    background: #3d3d3d;
+    color: white;
+    border-color: #555;
+}
+
+/* Active category state */
+#kategori-populer a.active {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Button styles */
+.detail-btn {
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-family: "Chela One", system-ui;
+    letter-spacing: 0.1rem;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background var(--transition);
+    font-weight: 600;
+}
+
+.detail-btn:hover {
+    background: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+/* Notification styles */
+.notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--accent-color);
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 1001;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* Modal backdrop */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    max-width: 500px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+/* Theme toggle button */
+#theme-toggle {
+    margin-left: auto;
+    background: var(--secondary-color) !important;
+    color: var(--text-color) !important;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+#theme-toggle:hover {
+    background: var(--primary-color) !important;
+    color: white !important;
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+    .modal-content {
+        margin: 1rem;
+        width: calc(100% - 2rem);
+    }
+    
+    #theme-toggle {
+        margin: 10px auto;
+        display: block;
+    }
 }
