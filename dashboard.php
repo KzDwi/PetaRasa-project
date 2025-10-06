@@ -75,9 +75,9 @@ $username = $_SESSION['username'];
     </header>
 
     <main>
-        <div class="dashboard-container">
+        <div class="dashboard-container">   
             <section class="welcome-section">
-                <h2>Selamat Datang, <?php echo htmlspecialchars($username); ?>! 👋</h2>
+                <h2 class="text-outline">Selamat Datang, <?php echo htmlspecialchars($username); ?>! 👋</h2>
                 <p>Ini adalah halaman dashboard Anda di PeRaSa</p>
             </section>
 

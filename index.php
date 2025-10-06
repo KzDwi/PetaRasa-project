@@ -32,7 +32,7 @@ session_start();
                     <li id="nav-menu"><a href="logout.php">Logout</a></li>
                 <?php else: ?>
                     <li id="nav-menu"><a href="login.php">Masuk</a></li>
-                    <li id="nav-menu"><a href="#Register">Daftar</a></li>
+                    <li id="nav-menu"><a href="#register">Daftar</a></li>
                 <?php endif; ?>
             </ul>
         </nav>

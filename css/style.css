@@ -303,7 +303,7 @@ button:hover {
 }
 
 nav ul:hover {
-  gap: 28px;
+  gap: 18px;
   background-color: none;
   transition: gap var(--transition);
 }
@@ -477,8 +477,11 @@ footer p {
     grid-template-columns: 1fr;
   }
 }
+  .text-outline {
+    color: var(--primary-color) !important;
+    text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+  }
 
-/* Tambahkan di akhir file style.css */
 
 /* Dark Mode Styles */
 .dark-mode {

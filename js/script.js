@@ -87,27 +87,9 @@ function setupEventListeners() {
 
 // Add theme toggle button to header
 function addThemeToggle() {
-    // const header = document.querySelector('header');
-    // const themeToggle = document.createElement('button');
-    // themeToggle.id = 'theme-toggle';
-    // themeToggle.innerHTML = '🌙 Dark Mode';
-    // themeToggle.style.marginLeft = 'auto';
-    // themeToggle.style.marginRight = '20px';
-    // themeToggle.style.background = 'var(--secondary-color)';
-    // themeToggle.style.color = 'var(--text-color)';
-    // themeToggle.style.border = 'none';
-    // themeToggle.style.padding = '8px 16px';
-    // themeToggle.style.borderRadius = '8px';
-    // themeToggle.style.cursor = 'pointer';
-    
-    // const nav = document.querySelector('nav');
-    // nav.appendChild(themeToggle);
-    
-    // elements.themeToggle = themeToggle;
-    // themeToggle.addEventListener('click', toggleDarkMode);
     const themeToggle = document.createElement('button');
     themeToggle.id = 'theme-toggle';
-    themeToggle.innerHTML = '🌙 Dark Mode';
+    // themeToggle.innerHTML = '🌙 Dark Mode';  
     themeToggle.style.cssText = `
         position: fixed;
         bottom: 30px;
@@ -390,17 +372,11 @@ function toggleDarkMode() {
 function enableDarkMode() {
     document.body.classList.add('dark-mode');
     localStorage.setItem('darkMode', 'true');
-    if (elements.themeToggle) {
-        elements.themeToggle.innerHTML = '☀️ Light Mode';
-    }
 }
 
 function disableDarkMode() {
     document.body.classList.remove('dark-mode');
     localStorage.setItem('darkMode', 'false');
-    if (elements.themeToggle) {
-        elements.themeToggle.innerHTML = '🌙 Dark Mode';
-    }
 }
 
 // Utility functions
