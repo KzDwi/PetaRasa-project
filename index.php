@@ -1,5 +1,36 @@
 <?php
 session_start();
+require_once 'config.php';
+
+// Ambil data restoran untuk ditampilkan di homepage
+$database = new Database();
+$db = $database->getConnection();
+$restaurant = new Restaurant($db);
+
+// Ambil 6 restoran terbaru untuk rekomendasi
+$stmt = $restaurant->readAll(1, 6, '');
+$recent_restaurants = [];
+while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+    $recent_restaurants[] = $row;
+}
+
+// Ambil data untuk ulasan terbaru (dummy data untuk sekarang)
+$recent_reviews = [
+    [
+        'restaurant' => "Mie Ayam Kacang",
+        'reviewer' => "Budi Santoso",
+        'rating' => 4,
+        'comment' => "Porsinya sangat besar, ayamnya juga banyak, harganya juga sangat murah. Cuma sedikit belum terbiasa buat makan mie ayam tanpa keripiknya yang diganti kacang.",
+        'date' => "2025-08-25"
+    ],
+    [
+        'restaurant' => "Kikitaru (Ex. Taberu)",
+        'reviewer' => "Sari Wijaya", 
+        'rating' => 5,
+        'comment' => "Tempatnya sangat mirip seperti di jepang, ramen nya juga ga kalah enak sama resto sebelah.",
+        'date' => "2025-08-24"
+    ]
+];
 ?>
 <!DOCTYPE html>
 <html lang="id">
@@ -29,6 +60,7 @@ session_start();
                 <li id="nav-menu"><a href="#randomize">Terserah Aja Deh</a></li>
                 <?php if(isset($_SESSION['username'])): ?>
                     <li id="nav-menu"><a href="dashboard.php">Dashboard</a></li>
+                    <li id="nav-menu"><a href="crud_index.php">Manage Restoran</a></li>
                     <li id="nav-menu"><a href="logout.php">Logout</a></li>
                 <?php else: ?>
                     <li id="nav-menu"><a href="login.php">Masuk</a></li>
@@ -99,49 +131,52 @@ session_start();
         </section>
 
         <section id="rekomendasi-restoran" class="card">
-            <h2>Rekomendasi Restoran</h2>
+            <h2>Rekomendasi Restoran Terbaru</h2>
             <div class="grid">
-                <article class="card">
-                    <h3>Kikitaru (Ex. Taberu)</h3>
-                    <p>SCP Mall Lt. 2, Samarinda.</p>
-                    <p>Masakan Jepang • $$$</p>
-                    <p>Rating: 4.5/5 (210 ulasan)</p>
-                    <a href="#kikitaru">Lihat Detail</a>
-                </article>
-                <article class="card">
-                    <h3>Nasi Kuning Mbah</h3>
-                    <p>Jl. KS Tubun Gg.7, Samarinda.</p>
-                    <p>Makanan Indonesia • $</p>
-                    <p>Rating: 4.7/5 (90 ulasan)</p>
-                    <a href="#naskun-tubun">Lihat Detail</a>
-                </article>
-                <article class="card">
-                    <h3>Mie Ayam Kacang</h3>
-                    <p>Jl. Kecapi, Dadi Mulya, Samarinda.</p>
-                    <p>Street Food • $</p>
-                    <p>Rating: 4.6/5 (31 ulasan)</p>
-                    <a href="#warung-padang">Lihat Detail</a>
-                </article>
+                <?php if(!empty($recent_restaurants)): ?>
+                    <?php foreach($recent_restaurants as $restaurant): ?>
+                        <article class="card">
+                            <h3><?php echo $restaurant['name']; ?></h3>
+                            <p class="address"><?php echo $restaurant['address'] ?: $restaurant['city']; ?></p>
+                            <p class="category"><?php echo $restaurant['category']; ?> • <?php echo $restaurant['price_range']; ?></p>
+                            <p class="rating">Rating: <?php echo $restaurant['rating']; ?>/5</p>
+                            <div style="display: flex; gap: 10px; margin-top: 15px;">
+                                <a href="crud_detail.php?id=<?php echo $restaurant['id']; ?>" class="detail-btn">Lihat Detail</a>
+                                <?php if(isset($_SESSION['username'])): ?>
+                                    <a href="crud_edit.php?id=<?php echo $restaurant['id']; ?>" class="detail-btn" style="background: var(--secondary-color); color: var(--text-color);">Edit</a>
+                                <?php endif; ?>
+                            </div>
+                        </article>
+                    <?php endforeach; ?>
+                <?php else: ?>
+                    <div class="no-data" style="grid-column: 1 / -1; text-align: center; padding: 2rem;">
+                        <p>Belum ada restoran yang terdaftar.</p>
+                        <?php if(isset($_SESSION['username'])): ?>
+                            <a href="crud_create.php" class="detail-btn">Tambah Restoran Pertama</a>
+                        <?php endif; ?>
+                    </div>
+                <?php endif; ?>
             </div>
+            
+            <?php if(isset($_SESSION['username'])): ?>
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="crud_index.php" class="detail-btn">Lihat Semua Restoran</a>
+                </div>
+            <?php endif; ?>
         </section>
 
         <section id="ulasan-terbaru" class="card">
             <h2>Ulasan Terbaru</h2>
             <div class="grid">
-                <article class="card">
-                    <h3>Mie Ayam Kacang</h3>
-                    <p>Oleh: Budi Santoso</p>
-                    <p>Rating: 4/5</p>
-                    <p>Porsinya sangat besar, ayamnya juga banyak, harganya juga sangat murah. Cuma sedikit belum terbiasa buat makan mie ayam tanpa keripiknya yang diganti kacang.</p>
-                    <time datetime="2025-08-25">25 Agustus 2025</time>
-                </article>
-                <article class="card">
-                    <h3>Kikitaru (Ex. Taberu)</h3>
-                    <p>Oleh: Sari Wijaya</p>
-                    <p>Rating: 5/5</p>
-                    <p>Tempatnya sangat mirip seperti di jepang, ramen nya juga ga kalah enak sama resto sebelah.</p>
-                    <time datetime="2025-08-24">24 Agustus 2025</time>
-                </article>
+                <?php foreach($recent_reviews as $review): ?>
+                    <article class="card">
+                        <h3><?php echo $review['restaurant']; ?></h3>
+                        <p class="reviewer">Oleh: <?php echo $review['reviewer']; ?></p>
+                        <p class="rating">Rating: <?php echo str_repeat('⭐', $review['rating']) . str_repeat('☆', 5 - $review['rating']); ?></p>
+                        <p class="comment"><?php echo $review['comment']; ?></p>
+                        <time datetime="<?php echo $review['date']; ?>"><?php echo date('d F Y', strtotime($review['date'])); ?></time>
+                    </article>
+                <?php endforeach; ?>
             </div>
         </section>
 

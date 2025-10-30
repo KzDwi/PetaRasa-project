@@ -27,6 +27,12 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 }
+
+// Redirect if already logged in
+if(isset($_SESSION['username'])) {
+    header('Location: dashboard.php');
+    exit();
+}
 ?>
 
 <!DOCTYPE html>

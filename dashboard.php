@@ -7,6 +7,17 @@ if(!isset($_SESSION['username'])) {
     exit();
 }
 
+require_once 'config.php';
+
+$database = new Database();
+$db = $database->getConnection();
+$restaurant = new Restaurant($db);
+
+// Hitung statistik
+$total_restaurants = $restaurant->countAll();
+$recent_restaurants = $restaurant->readAll(1, 3, '');
+$recent_count = $recent_restaurants->rowCount();
+
 $username = $_SESSION['username'];
 ?>
 
@@ -22,7 +33,7 @@ $username = $_SESSION['username'];
     <link href="https://fonts.googleapis.com/css2?family=Chela+One&display=swap" rel="stylesheet">
     <style>
         .dashboard-container {
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
         }
         .welcome-section {
@@ -45,17 +56,65 @@ $username = $_SESSION['username'];
             border-radius: var(--border-radius);
             text-align: center;
             box-shadow: var(--shadow);
+            border: 1.5px solid var(--secondary-color);
+            transition: transform var(--transition), box-shadow var(--transition);
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(255,127,80,0.15);
         }
         .stat-number {
             font-size: 2rem;
             font-weight: bold;
             color: var(--primary-color);
         }
+        .stat-label {
+            color: var(--muted-color);
+            font-size: 0.9rem;
+        }
         .action-buttons {
             display: flex;
             gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .quick-action-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            border: 2px dashed var(--accent-color);
+            transition: all var(--transition);
+            cursor: pointer;
+        }
+        .quick-action-card:hover {
+            border-color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        .quick-action-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        /* Dark mode specific styles untuk dashboard */
+        .dark-mode .welcome-section {
+            background: linear-gradient(135deg, #2d2d2d, #43aa8b);
+        }
+        .dark-mode .stat-card {
+            border-color: #555;
+        }
+        .dark-mode .stat-number {
+            color: var(--secondary-color);
+        }
+        .dark-mode .quick-action-card {
+            border-color: #555;
         }
     </style>
 </head>
@@ -68,7 +127,8 @@ $username = $_SESSION['username'];
         <nav>
             <ul>
                 <li id="nav-menu"><a href="index.php">Home</a></li>
-                <li id="nav-menu"><a href="#profile">Profile</a></li>
+                <li id="nav-menu"><a href="crud_index.php">Manage Restoran</a></li>
+                <li id="nav-menu"><a href="crud_create.php">Tambah Restoran</a></li>
                 <li id="nav-menu"><a href="logout.php">Logout</a></li>
             </ul>
         </nav>
@@ -78,27 +138,48 @@ $username = $_SESSION['username'];
         <div class="dashboard-container">   
             <section class="welcome-section">
                 <h2 class="text-outline">Selamat Datang, <?php echo htmlspecialchars($username); ?>! 👋</h2>
-                <p>Ini adalah halaman dashboard Anda di PeRaSa</p>
+                <p style="margin-left: -2.1rem;">Kelola data restoran dan ulasan di PeRaSa</p>
             </section>
 
             <section class="card">
                 <h2>Statistik Anda</h2>
                 <div class="stats-grid">
                     <div class="stat-card">
-                        <div class="stat-number">12</div>
-                        <div>Ulasan Ditulis</div>
+                        <div class="stat-number"><?php echo $total_restaurants; ?></div>
+                        <div class="stat-label">Total Restoran</div>
                     </div>
                     <div class="stat-card">
-                        <div class="stat-number">8</div>
-                        <div>Restoran Disukai</div>
+                        <div class="stat-number"><?php echo $recent_count; ?></div>
+                        <div class="stat-label">Restoran Baru</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-number">24</div>
-                        <div>Foto Diunggah</div>
+                        <div class="stat-label">Foto Diunggah</div>
                     </div>
                     <div class="stat-card">
                         <div class="stat-number">3</div>
-                        <div>Artikel Ditulis</div>
+                        <div class="stat-label">Artikel Ditulis</div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card">
+                <h2>Quick Actions</h2>
+                <div class="quick-actions">
+                    <div class="quick-action-card" onclick="location.href='crud_create.php'">
+                        <div class="quick-action-icon">🍽️</div>
+                        <h3>Tambah Restoran</h3>
+                        <p>Tambah restoran baru ke database</p>
+                    </div>
+                    <div class="quick-action-card" onclick="location.href='crud_index.php'">
+                        <div class="quick-action-icon">📋</div>
+                        <h3>Kelola Restoran</h3>
+                        <p>Lihat dan edit semua restoran</p>
+                    </div>
+                    <div class="quick-action-card" onclick="location.href='index.php'">
+                        <div class="quick-action-icon">🏠</div>
+                        <h3>Lihat Homepage</h3>
+                        <p>Kunjungi halaman utama</p>
                     </div>
                 </div>
             </section>
@@ -106,38 +187,43 @@ $username = $_SESSION['username'];
             <section class="card">
                 <h2>Aksi Cepat</h2>
                 <div class="action-buttons">
-                    <button onclick="location.href='index.php?search='" class="detail-btn">
-                        Tulis Ulasan Baru
+                    <button onclick="location.href='crud_create.php'" class="detail-btn">
+                        🍽️ Tambah Restoran
+                    </button>
+                    <button onclick="location.href='crud_index.php'" class="detail-btn">
+                        📋 Kelola Restoran
                     </button>
                     <button onclick="location.href='index.php'" class="detail-btn">
-                        Jelajahi Restoran
-                    </button>
-                    <button onclick="location.href='#profile'" class="detail-btn">
-                        Edit Profile
+                        🏠 Ke Homepage
                     </button>
                     <button onclick="location.href='logout.php'" class="detail-btn" 
                             style="background: #ff6b6b;">
-                        Logout
+                        🚪 Logout
                     </button>
                 </div>
             </section>
 
+            <?php if($recent_count > 0): ?>
             <section class="card">
-                <h2>Aktivitas Terbaru</h2>
+                <h2>Restoran Terbaru</h2>
                 <div class="grid">
-                    <article class="card">
-                        <h3>Ulasan di Mie Ayam Kacang</h3>
-                        <p>Rating: 4/5</p>
-                        <p>"Porsinya besar dan harganya terjangkau..."</p>
-                        <time datetime="2025-08-25">25 Agustus 2025</time>
-                    </article>
-                    <article class="card">
-                        <h3>Like Restoran Kikitaru</h3>
-                        <p>Anda menyukai restoran ini</p>
-                        <time datetime="2025-08-24">24 Agustus 2025</time>
-                    </article>
+                    <?php while ($row = $recent_restaurants->fetch(PDO::FETCH_ASSOC)): ?>
+                        <article class="card">
+                            <h3><?php echo $row['name']; ?></h3>
+                            <p><?php echo $row['category']; ?> • <?php echo $row['price_range']; ?></p>
+                            <p>Rating: <?php echo $row['rating']; ?>/5</p>
+                            <div style="display: flex; gap: 10px; margin-top: 15px;">
+                                <a href="crud_detail.php?id=<?php echo $row['id']; ?>" class="detail-btn">Lihat</a>
+                                <a href="crud_edit.php?id=<?php echo $row['id']; ?>" class="detail-btn" style="background: var(--secondary-color); color: var(--text-color);">Edit</a>
+                            </div>
+                        </article>
+                    <?php endwhile; ?>
+                </div>
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="crud_index.php" class="detail-btn">Lihat Semua Restoran</a>
                 </div>
             </section>
+            <?php endif; ?>
         </div>
     </main>
 
@@ -146,5 +232,7 @@ $username = $_SESSION['username'];
            Login sebagai: <strong><?php echo htmlspecialchars($username); ?></strong>
         </p>
     </footer>
+
+    <script src="js/script.js"></script>
 </body>
 </html>
